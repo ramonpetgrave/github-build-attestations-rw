@@ -179,7 +179,7 @@ jobs:
       - run: npm install @actions/artifact@2.1.9
       - name: download-stub
         if: ${{ inputs.self-hosted-runner-check-high-perms }}
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           ARTIFACT_ID: ${{ needs.build-high-perms.outputs.stub-artifact-id }}
         with:
@@ -189,7 +189,7 @@ jobs:
             await artifactClient.downloadArtifact(ARTIFACT_ID, { path: 'artifacts/'})
       - name: download-stub-attestation
         if: ${{ inputs.self-hosted-runner-check-high-perms }}
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           ARTIFACT_ID: ${{ needs.build-high-perms.outputs.stub-attestation-id }}
         with:
@@ -216,7 +216,7 @@ jobs:
             | grep "^$SOURCE_REF$" \
           && rm -rf "$ARTIFACTS_FOLDER" "$ATTESTATIONS_FOLDER"
       - name: download-build-artifact
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           ARTIFACT_ID: ${{ inputs.self-hosted-runner-check-high-perms && needs.build-high-perms.outputs.build-artifact-id || needs.build-low-perms.outputs.build-artifact-id }}
         with:
@@ -258,14 +258,14 @@ jobs:
         run: echo "self-hosted runner detected, failing job!" && exit 1
       - run: npm install @actions/artifact@2.1.9
       - name: download-artifact
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         with:
           script: |
             const {default: artifactClient} = require('@actions/artifact')
             const { BUILD_ARTIFACT_ID, ARTIFACTS_FOLDER } = process.env
             await artifactClient.downloadArtifact(BUILD_ARTIFACT_ID, { path: ARTIFACTS_FOLDER})
       - name: download-attestation
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         with:
           script: |
             const {default: artifactClient} = require('@actions/artifact')
